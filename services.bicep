@@ -11,8 +11,7 @@ param location string
 param location_abbreviation object
 
 param objectId string
-#disable-next-line secure-secrets-in-params
-param clientSecretId string
+param applicationId string
 @secure()
 param clientSecretValue string
 
@@ -175,7 +174,7 @@ resource website 'Microsoft.Web/sites@2022-03-01' = {
         { name: 'OBSERVE_CUSTOMER', value: observe_customer }
         { name: 'OBSERVE_TOKEN', value: '@Microsoft.KeyVault(SecretUri=https://${keyvault_name}.vault.azure.net/secrets/observe-token/)' }
         { name: 'AZURE_TENANT_ID', value: tenant().tenantId }
-        { name: 'AZURE_CLIENT_ID', value: clientSecretId }
+        { name: 'AZURE_CLIENT_ID', value: applicationId }
         { name: 'AZURE_CLIENT_SECRET', value: clientSecretValue }
         { name: 'AZURE_CLIENT_LOCATION', value: toLower(replace(location, ' ', '')) }
         { name: 'timer_resources_func_schedule', value: timer_resources_func_schedule }
