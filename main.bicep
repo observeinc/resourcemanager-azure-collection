@@ -95,9 +95,8 @@ param location_abbreviation object = {
 // As of October 2022, you have to create and assign AD roles manually before you can create an Azure AD app registration through a script.
 // So, it's easier for users to create the App Registration and Client Secret manually.
 param objectId string
+param applicationId string
 param enterpriseAppObjectId string
-#disable-next-line secure-secrets-in-params
-param clientSecretId string
 @secure()
 param clientSecretValue string
 
@@ -132,7 +131,7 @@ module services 'services.bicep' = {
     sub: sub
 
     objectId: objectId
-    clientSecretId: clientSecretId
+    applicationId: applicationId
     clientSecretValue: clientSecretValue
   }
   scope: azurerm_resource_group_observe_resource_group
