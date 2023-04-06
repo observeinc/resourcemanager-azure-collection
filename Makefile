@@ -1,8 +1,5 @@
 S3_CP_ARGS=aws s3 cp --acl public-read
-
-OBSERVE_CUSTOMER ?= 101
-OBSERVE_TOKEN ?= "not-a-real-token"
-OBSERVE_DOMAIN ?= observe-eng.com
+PARAMS ?= "check https://docs.observeinc.com/en/latest/content/integrations/azure/azure.html"
 
 .PHONY: changelog
 changelog:
@@ -20,15 +17,7 @@ validate: build
 	az deployment sub validate \
   --location westus \
   --template-file main.json \
-  --parameters \
-		observe_customer="$(OBSERVE_CUSTOMER)" \
-		observe_token="$(OBSERVE_TOKEN)" \
-		observe_domain="$(OBSERVE_DOMAIN)" \
-		location="westus3" \
-		objectId=6bb2971a-0579-49c8-bd59-8d0bcc91ccf9 \
-		clientSecretId=7e1dba81-d526-4e52-8d63-3c5e6dc4a48f \
-		clientSecretValue=gCs8Q~I1STWEhs77XK68PUo76nq9Kn~r7mSbNb9J \
-		enterpriseAppObjectId=2638cb1f-6ef2-473e-b43c-3282b08b4934
+  --parameters $(PARAMS)
 
 # Dev command
 .PHONY: deploy
@@ -37,15 +26,7 @@ deploy: build
   --name observe-arm-${USER} \
   --location westus \
   --template-file main.json \
-  --parameters \
-		observe_customer="$(OBSERVE_CUSTOMER)" \
-		observe_token="$(OBSERVE_TOKEN)" \
-		observe_domain="$(OBSERVE_DOMAIN)" \
-		location="westus3" \
-		objectId=6bb2971a-0579-49c8-bd59-8d0bcc91ccf9 \
-		clientSecretId=7e1dba81-d526-4e52-8d63-3c5e6dc4a48f \
-		clientSecretValue=gCs8Q~I1STWEhs77XK68PUo76nq9Kn~r7mSbNb9J \
-		enterpriseAppObjectId=2638cb1f-6ef2-473e-b43c-3282b08b4934
+  --parameters $(PARAMS)
 
 # Dev command
 .PHONY: undeploy
