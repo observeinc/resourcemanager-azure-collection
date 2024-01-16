@@ -72,7 +72,7 @@ resource key_vault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   }
 
   resource azurerm_key_vault_secret_observe_password 'secrets@2022-07-01' = {
-    name: 'observe-passsword'
+    name: 'observe-password'
     properties: {
       value: clientSecretValue
     }
