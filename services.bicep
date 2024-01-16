@@ -70,7 +70,17 @@ resource key_vault 'Microsoft.KeyVault/vaults@2022-07-01' = {
       value: observe_token
     }
   }
+
+  resource azurerm_key_vault_secret_observe_password 'secrets@2022-07-01' = {
+    name: 'observe-password'
+    properties: {
+      value: clientSecretValue
+    }
+  }
+
 }
+
+
 
 // EventHub
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-bicep
@@ -175,7 +185,7 @@ resource website 'Microsoft.Web/sites@2022-03-01' = {
         { name: 'OBSERVE_TOKEN', value: '@Microsoft.KeyVault(SecretUri=https://${keyvault_name}.vault.azure.net/secrets/observe-token/)' }
         { name: 'AZURE_TENANT_ID', value: tenant().tenantId }
         { name: 'AZURE_CLIENT_ID', value: applicationId }
-        { name: 'AZURE_CLIENT_SECRET', value: clientSecretValue }
+        { name: 'AZURE_CLIENT_SECRET', value: '@Microsoft.KeyVault(SecretUri=https://${keyvault_name}.vault.azure.net/secrets/observe-password/)' }
         { name: 'AZURE_CLIENT_LOCATION', value: toLower(replace(location, ' ', '')) }
         { name: 'timer_resources_func_schedule', value: timer_resources_func_schedule }
         { name: 'timer_vm_metrics_func_schedule', value: timer_vm_metrics_func_schedule }

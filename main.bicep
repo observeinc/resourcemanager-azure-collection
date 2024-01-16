@@ -8,7 +8,7 @@ param observe_token string
 param observe_domain string = 'observeinc.com'
 param timer_resources_func_schedule string = '0 */10 * * * *'
 param timer_vm_metrics_func_schedule string = '30 */5 * * * *'
-param func_url string = 'https://observeinc.s3.us-west-2.amazonaws.com/azure/azure-collection-functions-v0.7.0.zip'
+param func_url string = 'https://observeinc.s3.us-west-2.amazonaws.com/azure/azure-collection-functions-v0.10.0.zip'
 param location string = deployment().location
 param location_abbreviation object = {
   australiacentral: 'ac'
