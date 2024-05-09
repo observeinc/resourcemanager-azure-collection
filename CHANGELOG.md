@@ -2,10 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+
+
+<a name="v0.10.0"></a>
+## [v0.10.0] - 2024-05-09
+
+- chore: update version to v0.11.2
+- Update CODEOWNERS
+
+
+<a name="v0.9.0"></a>
+## [v0.9.0] - 2024-03-25
+
+- chore: update function version to v0.11.0
+- Update Changelog
+
+
 <a name="v0.8.0"></a>
 ## [v0.8.0] - 2024-01-16
 
-- feat: updated securities for accessing AZURE_CLIENT_SECRET
+- Update CO
+- typo
+- update key vault for client secret
+- update functions app version
 
 
 <a name="v0.7.0"></a>
@@ -53,7 +72,9 @@ All notable changes to this project will be documented in this file.
 - first commit
 
 
-[Unreleased]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.11.0...HEAD
+[v0.11.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.10.0...v0.11.0
+[v0.10.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.9.0...v0.10.0
 [v0.9.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.8.0...v0.9.0
 [v0.8.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.7.0...v0.8.0
 [v0.7.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.6.0...v0.7.0
