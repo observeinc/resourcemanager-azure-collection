@@ -9,6 +9,7 @@ param observe_domain string = 'observeinc.com'
 param timer_resources_func_schedule string = '0 */10 * * * *'
 param timer_vm_metrics_func_schedule string = '30 */5 * * * *'
 param func_url string = 'https://observeinc.s3.us-west-2.amazonaws.com/azure/azure-collection-functions-0.11.3.zip'
+param feature_flags string = ''
 param location string = deployment().location
 param location_abbreviation object = {
   australiacentral: 'ac'
@@ -129,6 +130,7 @@ module services 'services.bicep' = {
     location: location
     location_abbreviation: location_abbreviation
     sub: sub
+    feature_flags: feature_flags
 
     objectId: objectId
     applicationId: applicationId
