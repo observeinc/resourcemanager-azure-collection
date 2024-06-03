@@ -8,6 +8,7 @@ param timer_resources_func_schedule string
 param timer_vm_metrics_func_schedule string
 param func_url string
 param location string
+param feature_flags string
 param location_abbreviation object
 
 param objectId string
@@ -192,6 +193,8 @@ resource website 'Microsoft.Web/sites@2022-03-01' = {
 
         { name: 'FUNCTIONS_EXTENSION_VERSION', value: '~4' }
         { name: 'FUNCTIONS_WORKER_RUNTIME', value: 'python' }
+        { name: 'FEATURE_FLAGS', value: feature_flags }
+
 
         { name: 'EVENTHUB_TRIGGER_FUNCTION_EVENTHUB_NAME', value: azurerm_eventhub_namespace_observe_eventhub_namespace::azurerm_eventhub_observe_eventhub.name }
         { name: 'EVENTHUB_TRIGGER_FUNCTION_EVENTHUB_CONNECTION', value: azurerm_eventhub_namespace_observe_eventhub_namespace::azurerm_eventhub_observe_eventhub::azurerm_eventhub_authorization_rule_observe_eventhub_access_policy.listKeys().primaryConnectionString }
