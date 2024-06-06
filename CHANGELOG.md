@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+<a name="unreleased"></a>
+## [Unreleased]
+
+
+
+<a name="v0.14.0"></a>
+## [v0.14.0] - 0001-01-01
+
+
+
+<a name="v0.13.0"></a>
+## [v0.13.0] - 2024-06-06
+
+- Update azure-collection-functions version to 0.11.4
+
+
+<a name="v0.12.0"></a>
+## [v0.12.0] - 2024-06-03
+
+- feat: add FF for function app
+
+
+<a name="v0.11.0"></a>
+## [v0.11.0] - 2024-05-28
+
+- chore: update version to v0.11.3
+- Update Changelog
 
 
 <a name="v0.10.0"></a>
@@ -72,7 +99,10 @@ All notable changes to this project will be documented in this file.
 - first commit
 
 
-[Unreleased]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.11.0...HEAD
+[Unreleased]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.14.0...HEAD
+[v0.14.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.13.0...v0.14.0
+[v0.13.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.12.0...v0.13.0
+[v0.12.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.11.0...v0.12.0
 [v0.11.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.10.0...v0.11.0
 [v0.10.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.9.0...v0.10.0
 [v0.9.0]: https://github.com/observeinc/resourcemanager-azure-collection/compare/v0.8.0...v0.9.0
