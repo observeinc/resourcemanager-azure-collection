@@ -2,15 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-<a name="unreleased"></a>
-## [Unreleased]
-
-
-
-<a name="v0.14.0"></a>
-## [v0.14.0] - 0001-01-01
-
-
 
 <a name="v0.13.0"></a>
 ## [v0.13.0] - 2024-06-06
