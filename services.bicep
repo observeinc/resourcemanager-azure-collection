@@ -170,9 +170,16 @@ resource website 'Microsoft.Web/sites@2022-03-01' = {
   properties: {
     reserved: true
     serverFarmId: azurerm_service_plan_observe_service_plan.id
+
+    httpsOnly: true
+    publicNetworkAccess: 'Disabled'
+
     siteConfig: {
       // az webapp list-runtimes --linux but with | instead of :
-      linuxFxVersion: 'PYTHON|3.9'
+      linuxFxVersion: 'PYTHON|3.12'
+
+      minTlsVersion: '1.3'
+      http20Enabled: true
 
       appSettings: [
         // storage_account_name and storage_account_access_key in terraform
