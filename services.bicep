@@ -85,7 +85,7 @@ resource key_vault 'Microsoft.KeyVault/vaults@2022-07-01' = {
 
 // EventHub
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-bicep
-resource azurerm_eventhub_namespace_observe_eventhub_namespace 'Microsoft.EventHub/namespaces@2021-11-01' = {
+resource azurerm_eventhub_namespace_observe_eventhub_namespace 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: keyvault_name
   location: location
   sku: {
@@ -93,6 +93,10 @@ resource azurerm_eventhub_namespace_observe_eventhub_namespace 'Microsoft.EventH
     capacity: 2
   }
 
+  properties: {
+    minimumTlsVersion: '1.2'
+  }
+  
   tags: {
     created_by: 'Observe Resource Manager'
   }
