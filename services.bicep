@@ -147,6 +147,10 @@ resource azurerm_storage_account_observe_storage_account 'Microsoft.Storage/stor
   }
   kind: 'StorageV2'
 
+  properties: {
+    minimumTlsVersion: 'TLS1_2'
+  }
+
   resource blob 'blobServices' = {
     name: 'default'
 
