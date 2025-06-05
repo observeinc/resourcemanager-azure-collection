@@ -26,6 +26,8 @@ jobs:
 
     - name: Build the json
       run: make build 
-      
+
     - name: Test
-      run: az deployment sub create --name ${{ vars.DEPLOYMENT_NAME }} --location westus --template-file main.json --parameters observe_customer=${{ secrets.OBSERVE_CUSTOMER }} observe_token=${{ secrets.OBSERVE_TOKEN}} observe_domain=${{ secrets.OBSERVE_DOMAIN}} objectId=${{ secrets.AZURE_OBJECT_ID }} applicationId=${{ secrets.AZURE_APPLICATION_ID }} clientSecretValue=${{ secrets.AZURE_CLIENT_SECRET }} enterpriseAppObjectId=${{secrets.AZURE_ENTERPRISE_APP_OBJECT_ID }}
+      run: |
+        az deployment sub create --name ${{ vars.DEPLOYMENT_NAME }} --location westus --template-file main.json --parameters observe_customer=${{ secrets.OBSERVE_CUSTOMER }} observe_token=${{ secrets.OBSERVE_TOKEN}} observe_domain=${{ secrets.OBSERVE_DOMAIN}} objectId=${{ secrets.AZURE_OBJECT_ID }} applicationId=${{ secrets.AZURE_APPLICATION_ID }} clientSecretValue=${{ secrets.AZURE_CLIENT_SECRET }} enterpriseAppObjectId=${{secrets.AZURE_ENTERPRISE_APP_OBJECT_ID }}
+        echo "build completed successfully"
