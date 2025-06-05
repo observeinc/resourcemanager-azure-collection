@@ -18,6 +18,11 @@ jobs:
 
     - name: Install azure cli
       run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-      
+
+    - name: Login to azure
+      uses: azure/login@v2
+      with:
+        azp-credentials: ${{ secrets.AZURE_CREDENTIALS }}  
+        
     - name: Test
       run: make deploy PARAMS="observe_customer=${{ secrets.OBSERVE_CUSTOMER }} observe_token=${{ secrets.OBSERVE_TOKEN}} observe_domain=${{ secrets.OBSERVE_DOMAIN}} objectId=${{ secrets.AZURE_OBJECT_ID }} applicationId=${{ secrets.AZURE_APPLICATION_ID }} clientSecretValue=${{ secrets.AZURE_CLIENT_SECRET }} enterpriseAppObjectId=${{secrets.AZURE_ENTERPRISE_APP_OBJECT_ID }}"
