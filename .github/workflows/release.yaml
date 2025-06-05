@@ -1,0 +1,104 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  permission_check:
+    runs-on: ubuntu-latest
+    outputs:
+      can-write: ${{ steps.check.outputs.can-write }}
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    steps:
+    - id: check
+      run: |
+        # If the AWS_ACCESS_KEY_ID secret is MIA we can't upload assets
+        if [[ -z "$AWS_ACCESS_KEY_ID" ]]; then
+            echo "can-write=false" >> $GITHUB_OUTPUT
+        else
+            echo "can-write=true" >> $GITHUB_OUTPUT
+        fi
+
+  tests:
+    needs: permission_check
+    uses: ./.github/workflows/tests.yaml
+    secrets: inherit
+
+  github-release:
+    needs: [tests, permission_check]
+    runs-on: ubuntu-latest
+    if: >
+      (needs.permission_check.outputs.can-write == 'true' && github.event_name == 'push') || 
+      (github.event_name == 'workflow_dispatch' && needs.tests.result == 'success')
+    outputs:
+      version: ${{ steps.release-version.outputs.VERSION }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: github release (beta)
+      if: github.event_name == 'push'
+      id: prerelease
+      uses: ahmadnassri/action-semantic-release@v2
+      with:
+        config: ${{ github.workspace }}/.releaserc.json
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: github release (stable)
+      if: github.event_name == 'workflow_dispatch'
+      id: fullrelease
+      uses: ahmadnassri/action-semantic-release@v2
+      with:
+        config: ${{ github.workspace }}/.releaserc-release.json
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set version for release job
+      id: release-version
+      run: |
+        echo "VERSION=${{ env.VERSION }}" >> "$GITHUB_OUTPUT"
+      env:
+        VERSION: ${{ (steps.prerelease.outputs.release-version != '') && steps.prerelease.outputs.release-version || steps.fullrelease.outputs.release-version }}
+      
+  release:
+    needs: [github-release]
+    runs-on: ubuntu-latest
+    if: |
+      github.actor != 'dependabot[bot]' &&
+      needs.github-release.outputs.version != ''
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: Setup AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4.0.2
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        aws-region: us-west-2
+
+    - name: AWS Info
+      run: aws sts get-caller-identity
+
+    - name: build
+      run: make release
+      env:
+        VERSION: ${{ needs.github-release.outputs.VERSION }}
+
+    - name: delete pre-releases
+      uses: dev-drprasad/delete-older-releases@v0.3.3
+      with:
+        keep_latest: 0
+        delete_tags: true
+        delete_prerelease_only: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
