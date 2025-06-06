@@ -16,16 +16,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # - name: Install azure cli
-    #   run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    - name: Install azure cli
+      run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
     - name: Login to azure
-      uses: azure/login@v2
+      uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}  
 
     - name: Build the json
-      run: make build 
+      run: az bicep build --file main.bicep 
 
        # Deploy ARM template
     - name: Run ARM deploy
