@@ -28,9 +28,8 @@ jobs:
         # subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         scope: subscription
         template: ./main.bicep
-        parameters: observe_customer=${{ secrets.OBSERVE_CUSTOMER }} observe_token=${{ secrets.OBSERVE_TOKEN}} observe_domain=${{ secrets.OBSERVE_DOMAIN}} objectId=${{ secrets.AZURE_OBJECT_ID }} applicationId=${{ secrets.AZURE_APPLICATION_ID }} clientSecretValue=${{ secrets.AZURE_CLIENT_SECRET }} enterpriseAppObjectId=${{secrets.AZURE_ENTERPRISE_APP_OBJECT_ID }}
+        parameters: observe_customer=${{ secrets.OBSERVE_CUSTOMER }} observe_token=${{ secrets.OBSERVE_TOKEN}} observe_domain=${{ secrets.OBSERVE_DOMAIN}} objectId=${{ secrets.AZURE_OBJECT_ID }} applicationId=${{ secrets.AZURE_APPLICATION_ID }} clientSecretValue=${{ secrets.AZURE_CLIENT_SECRET }} enterpriseAppObjectId=${{secrets.AZURE_ENTERPRISE_APP_OBJECT_ID }} --debug
         deploymentName: ${{ vars.DEPLOYMENT_NAME }}
         region: WestUS
-        debug: true
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         failOnStdErr: false 
