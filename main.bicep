@@ -110,6 +110,7 @@ resource azurerm_role_assignment_observe_role_assignment 'Microsoft.Authorizatio
   }
 }
 
+#disable-next-line BCP329
 var sub = substring(subscription().subscriptionId, length(subscription().subscriptionId) - 4, 4)
 
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.resources/resourcegroups?pivots=deployment-language-bicep

@@ -1,0 +1,45 @@
+name: Run Testing
+
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - main
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    # Runs every day at 8:00 AM UTC
+    # For a different time, adjust the 'hour' and 'minute' fields.
+    # Example: If you want 8:00 AM EST (UTC-4), it would be 12:00 PM UTC (0 12 * * *)
+    # Example: If you want 8:00 AM PDT (UTC-7), it would be 3:00 PM UTC (0 15 * * *)
+    - cron: '15 12 * * *' # Minute (15) Hour (12) DayOfMonth (*) Month (*) DayOfWeek (*)
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # - name: Login to azure
+    #   uses: azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}  
+
+    - name: Build the json that the customer will use
+      run: make build
+
+    #    # Deploy ARM template
+    # - name: Run ARM deploy
+    #   uses: azure/arm-deploy@v1
+    #   with:
+    #     # subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+    #     scope: subscription
+    #     template: ./main.json
+    #     parameters: observe_customer=${{ secrets.OBSERVE_CUSTOMER }} observe_token=${{ secrets.OBSERVE_TOKEN}} observe_domain=${{ secrets.OBSERVE_DOMAIN}} objectId=${{ secrets.AZURE_OBJECT_ID }} applicationId=${{ secrets.AZURE_APPLICATION_ID }} clientSecretValue=${{ secrets.AZURE_CLIENT_SECRET }} enterpriseAppObjectId=${{secrets.AZURE_ENTERPRISE_APP_OBJECT_ID }}
+    #     deploymentName: ${{ vars.DEPLOYMENT_NAME }}
+    #     region: WestUS
+    #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+    #     # failOnStdErr: false 
