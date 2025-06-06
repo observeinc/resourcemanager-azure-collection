@@ -1,5 +1,6 @@
 S3_CP_ARGS=aws s3 cp --acl public-read
 PARAMS ?= "check https://docs.observeinc.com/en/latest/content/integrations/azure/azure.html"
+VERSION ?= "should be set by github environment"
 
 .PHONY: changelog
 changelog:
@@ -7,8 +8,8 @@ changelog:
 
 .PHONY: release
 release: build
-	semtag final -s minor
-	$(S3_CP_ARGS) main.json s3://observeinc/azure/resourcemanager-`semtag getcurrent`.json
+#   semtag final -s minor
+	$(S3_CP_ARGS) main.json s3://observeinc/azure/resourcemanager-${VERSION}.json
 	$(S3_CP_ARGS) main.json s3://observeinc/azure/resourcemanager-latest.json
 
 # Dev command
