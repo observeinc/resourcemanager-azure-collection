@@ -21,13 +21,16 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}  
 
+    - name: Build the json that the customer will use
+      run: make build
+
        # Deploy ARM template
     - name: Run ARM deploy
       uses: azure/arm-deploy@v1
       with:
         # subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         scope: subscription
-        template: ./main.bicep
+        template: ./main.json
         parameters: observe_customer=${{ secrets.OBSERVE_CUSTOMER }} observe_token=${{ secrets.OBSERVE_TOKEN}} observe_domain=${{ secrets.OBSERVE_DOMAIN}} objectId=${{ secrets.AZURE_OBJECT_ID }} applicationId=${{ secrets.AZURE_APPLICATION_ID }} clientSecretValue=${{ secrets.AZURE_CLIENT_SECRET }} enterpriseAppObjectId=${{secrets.AZURE_ENTERPRISE_APP_OBJECT_ID }}
         deploymentName: ${{ vars.DEPLOYMENT_NAME }}
         region: WestUS
