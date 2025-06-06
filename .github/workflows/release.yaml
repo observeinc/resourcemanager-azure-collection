@@ -94,11 +94,11 @@ jobs:
       env:
         VERSION: ${{ needs.github-release.outputs.VERSION }}
 
-    - name: delete pre-releases
-      uses: dev-drprasad/delete-older-releases@v0.3.3
-      with:
-        keep_latest: 0
-        delete_tags: true
-        delete_prerelease_only: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: delete pre-releases
+    #   uses: dev-drprasad/delete-older-releases@v0.3.3
+    #   with:
+    #     keep_latest: 0
+    #     delete_tags: true
+    #     delete_prerelease_only: true
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
