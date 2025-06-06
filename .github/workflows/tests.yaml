@@ -38,4 +38,4 @@ jobs:
         region: westus
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
-         
+        failOnStdErr: false 
